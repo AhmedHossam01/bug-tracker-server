@@ -8,15 +8,14 @@ const { createCoreController } = require("@strapi/strapi").factories;
 
 module.exports = createCoreController("api::project.project", ({ strapi }) => ({
   async find(ctx) {
-    const query = {
-      filters: {
-        members: { id: ctx.state.user.id },
-      },
+    ctx.request.query.filters = {
+      $or: [
+        { members: { id: ctx.state.user.id } },
+        { owner: { id: ctx.state.user.id } },
+      ],
     };
 
-    const projects = await super.find({ query });
-
-    return projects;
+    return await super.find(ctx);
   },
 
   async create(ctx) {
