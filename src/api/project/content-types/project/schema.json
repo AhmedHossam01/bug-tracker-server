@@ -24,7 +24,8 @@
         "indigo",
         "green"
       ],
-      "required": false
+      "required": false,
+      "default": "indigo"
     },
     "owner": {
       "type": "relation",
@@ -37,6 +38,12 @@
       "relation": "manyToMany",
       "target": "plugin::users-permissions.user",
       "inversedBy": "member_of"
+    },
+    "tickets": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::ticket.ticket",
+      "mappedBy": "project"
     }
   }
 }

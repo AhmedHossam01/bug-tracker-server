@@ -74,6 +74,18 @@
       "relation": "manyToMany",
       "target": "api::project.project",
       "mappedBy": "members"
+    },
+    "tickets": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::ticket.ticket",
+      "mappedBy": "owner"
+    },
+    "assignedTickets": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::ticket.ticket",
+      "mappedBy": "assignee"
     }
   }
 }
