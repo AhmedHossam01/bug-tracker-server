@@ -15,6 +15,26 @@
       "type": "string",
       "required": true,
       "maxLength": 256
+    },
+    "color": {
+      "type": "enumeration",
+      "enum": [
+        "red",
+        "indigo",
+        "green"
+      ]
+    },
+    "owner": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "projects"
+    },
+    "members": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "member_of"
     }
   }
 }
