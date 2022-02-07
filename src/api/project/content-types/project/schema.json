@@ -4,7 +4,8 @@
   "info": {
     "singularName": "project",
     "pluralName": "projects",
-    "displayName": "Project"
+    "displayName": "Project",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -22,7 +23,8 @@
         "red",
         "indigo",
         "green"
-      ]
+      ],
+      "required": false
     },
     "owner": {
       "type": "relation",
