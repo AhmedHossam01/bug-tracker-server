@@ -1,126 +1,101 @@
 {
-  "products": [
+  "projects": [
     {
       "id": 1,
-      "name": "Product001",
-      "cost": 10,
-      "quantity": 1000,
-      "locationId": 1,
-      "familyId": 1
+      "name": "Inventory Management System",
+      "description": "A simple inventory management system",
+      "color": "#6366F1",
+      "updated_at": "2020-03-14T00:00:00.000Z",
+      "created_at": "2018-03-14T00:00:00.000Z"
     },
     {
       "id": 2,
-      "name": "Product002",
-      "cost": 20,
-      "quantity": 2000,
-      "locationId": 1,
-      "familyId": 2
+      "name": "Music Player",
+      "description": "A simple music player",
+      "color": "#A855F7",
+      "updated_at": "2020-09-14T00:00:00.000Z",
+      "created_at": "2019-03-14T00:00:00.000Z"
     },
     {
       "id": 3,
-      "name": "Product003",
-      "cost": 30,
-      "quantity": 3000,
-      "locationId": 3,
-      "familyId": 2
+      "name": "Personal Portfolio",
+      "description": "A simple portfolio",
+      "color": "#22C55E",
+      "updated_at": "2020-07-14T00:00:00.000Z",
+      "created_at": "2019-01-14T00:00:00.000Z"
     },
     {
       "id": 4,
-      "name": "Product004",
-      "cost": 40,
-      "quantity": 4000,
-      "locationId": 2,
-      "familyId": 3
-    },
-    {
-      "id": 5
-    },
-    {
-      "id": 6
-    },
-    {
-      "id": 7
-    },
-    {
-      "id": 8
-    },
-    {
-      "id": 9
-    },
-    {
-      "id": 10
-    },
-    {
-      "id": 11
-    },
-    {
-      "id": 12
-    },
-    {
-      "id": 13
-    },
-    {
-      "id": 14
-    },
-    {
-      "id": 15
-    },
-    {
-      "id": 16
-    },
-    {
-      "id": 17
-    },
-    {
-      "id": 18
+      "name": "Next Big Thing",
+      "description": "A simple next big thing",
+      "color": "#0EA5E9",
+      "updated_at": "2022-01-14T00:00:00.000Z",
+      "created_at": "2019-09-14T00:00:00.000Z"
     }
   ],
-  "locations": [
+  "tickets": [
     {
       "id": 1,
-      "name": "Location001"
+      "name": "Ticket 1",
+      "description": "Ticket 1 description",
+      "projectId": 1,
+      "status": "todo",
+      "tags": ["MVP", "UI"],
+      "created_at": "2020-03-14T00:00:00.000Z"
     },
     {
       "id": 2,
-      "name": "Location002"
+      "name": "Ticket 2",
+      "description": "Ticket 2 description",
+      "projectId": 2,
+      "status": "todo",
+      "tags": ["MVP", "UI"],
+      "created_at": "2020-03-14T00:00:00.000Z"
     },
     {
       "id": 3,
-      "name": "Location003"
-    }
-  ],
-  "families": [
-    {
-      "id": 1,
-      "name": "FM001"
+      "name": "Ticket 3",
+      "description": "Ticket 3 description",
+      "projectId": 1,
+      "status": "todo",
+      "tags": ["MVP", "UI"],
+      "created_at": "2020-03-14T00:00:00.000Z"
     },
     {
-      "id": 2,
-      "name": "FM002"
+      "id": 4,
+      "name": "Ticket 4",
+      "description": "Ticket 4 description",
+      "projectId": 1,
+      "status": "todo",
+      "tags": ["MVP", "UI"],
+      "created_at": "2020-03-14T00:00:00.000Z"
     },
     {
-      "id": 3,
-      "name": "FM003"
-    }
-  ],
-  "transactions": [
-    {
-      "id": 1,
-      "cost": 11,
-      "quantity": 10,
-      "productId": 1
+      "id": 5,
+      "name": "Ticket 5",
+      "description": "Ticket 5 description",
+      "projectId": 1,
+      "status": "todo",
+      "tags": ["MVP", "UI"],
+      "created_at": "2020-03-14T00:00:00.000Z"
     },
     {
-      "id": 2,
-      "cost": 12,
-      "quantity": 100,
-      "productId": 2
+      "id": 6,
+      "name": "Ticket 6",
+      "description": "Ticket 6 description",
+      "projectId": 1,
+      "status": "todo",
+      "tags": ["MVP", "UI"],
+      "created_at": "2020-03-14T00:00:00.000Z"
     },
     {
-      "id": 3,
-      "cost": 15,
-      "quantity": 101,
-      "productId": 3
+      "id": 7,
+      "name": "Ticket 7",
+      "description": "Ticket 7 description",
+      "projectId": 1,
+      "status": "todo",
+      "tags": ["MVP", "UI"],
+      "created_at": "2020-03-14T00:00:00.000Z"
     }
   ]
 }
