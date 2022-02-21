@@ -2,6 +2,7 @@ const fs = require("fs");
 const bodyParser = require("body-parser");
 const jsonServer = require("json-server");
 const jwt = require("jsonwebtoken");
+const { default: faker } = require("@faker-js/faker");
 
 const server = jsonServer.create();
 const router = jsonServer.router("./database.json");
@@ -99,7 +100,9 @@ server.post("/auth/login", (req, res) => {
   }
   const access_token = createToken({ email, password });
   console.log("Access Token:" + access_token);
-  res.status(200).json({ access_token, user: { email } });
+  res
+    .status(200)
+    .json({ access_token, user: { email, avatar: faker.image.avatar() } });
 });
 
 server.get("/auth/me", (req, res) => {
@@ -126,7 +129,7 @@ server.get("/auth/me", (req, res) => {
     const { email, id } = userdb.users.find(
       (user) => user.email === verifyTokenResult.email
     );
-    res.json({ email, id });
+    res.json({ email, id, avatar: faker.image.animals() });
   } catch (err) {
     const status = 401;
     const message = "Error access_token is revoked";
