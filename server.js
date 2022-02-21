@@ -32,6 +32,7 @@ function verifyToken(token) {
 
 // Check if the user exists in database
 async function isAuthenticated({ email, password }) {
+  const userdb = JSON.parse(fs.readFileSync("./users.json", "UTF-8"));
   const myUser = userdb.users.find((user) => user.email === email);
 
   if (!myUser) {
@@ -101,7 +102,9 @@ server.post("/auth/register", (req, res) => {
   // Create token for new user
   const access_token = createToken({ email, password });
   console.log("Access Token:" + access_token);
-  res.status(200).json({ access_token });
+  res
+    .status(200)
+    .json({ access_token, user: { email, avatar: faker.image.avatar() } });
 });
 
 // Login to one of the users from ./users.json
@@ -121,7 +124,20 @@ server.post("/auth/login", async (req, res) => {
   }
 });
 
+server.get("/auth/check/:email", (req, res) => {
+  const userdb = JSON.parse(fs.readFileSync("./users.json", "UTF-8"));
+  const myUser = userdb.users.find((user) => user.email === req.params.email);
+
+  if (myUser) {
+    res.json({ result: false });
+  } else {
+    res.json({ result: true });
+  }
+});
+
 server.get("/auth/me", (req, res) => {
+  const userdb = JSON.parse(fs.readFileSync("./users.json", "UTF-8"));
+
   if (
     req.headers.authorization === undefined ||
     req.headers.authorization.split(" ")[0] !== "Bearer"
@@ -145,7 +161,7 @@ server.get("/auth/me", (req, res) => {
     const { email, id } = userdb.users.find(
       (user) => user.email === verifyTokenResult.email
     );
-    res.json({ email, id, avatar: faker.image.animals() });
+    res.json({ email, id, avatar: faker.image.avatar() });
   } catch (err) {
     const status = 401;
     const message = "Error access_token is revoked";
