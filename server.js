@@ -3,6 +3,8 @@ const bodyParser = require("body-parser");
 const jsonServer = require("json-server");
 const jwt = require("jsonwebtoken");
 const { default: faker } = require("@faker-js/faker");
+const bcrypt = require("bcrypt");
+const saltRounds = 10;
 
 const server = jsonServer.create();
 const router = jsonServer.router("./database.json");
@@ -29,23 +31,32 @@ function verifyToken(token) {
 }
 
 // Check if the user exists in database
-function isAuthenticated({ email, password }) {
-  return (
-    userdb.users.findIndex(
-      (user) => user.email === email && user.password === password
-    ) !== -1
-  );
+async function isAuthenticated({ email, password }) {
+  const myUser = userdb.users.find((user) => user.email === email);
+
+  if (!myUser) {
+    return false;
+  }
+
+  const match = await bcrypt.compare(password, myUser.password);
+  console.log(match);
+
+  if (match) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 // Register New User
 server.post("/auth/register", (req, res) => {
   console.log("register endpoint called; request body:");
-  console.log(req.body);
+
   const { email, password } = req.body;
 
-  if (isAuthenticated({ email, password }) === true) {
+  if (userdb.users.find((user) => user.email === email)) {
     const status = 401;
-    const message = "Email and Password already exist";
+    const message = "Email already exist";
     res.status(status).json({ status, message });
     return;
   }
@@ -64,21 +75,27 @@ server.post("/auth/register", (req, res) => {
     // Get the id of last user
     var last_item_id = data.users[data.users.length - 1].id;
 
-    //Add new user
-    data.users.push({ id: last_item_id + 1, email: email, password: password }); //add some data
-    var writeData = fs.writeFile(
-      "./users.json",
-      JSON.stringify(data),
-      (err, result) => {
-        // WRITE
-        if (err) {
-          const status = 401;
-          const message = err;
-          res.status(status).json({ status, message });
-          return;
+    bcrypt.hash(password, saltRounds, function (err, hash) {
+      //Add new user
+      data.users.push({
+        id: last_item_id + 1,
+        email: email,
+        password: hash,
+      }); //add some data
+      var writeData = fs.writeFile(
+        "./users.json",
+        JSON.stringify(data),
+        (err, result) => {
+          // WRITE
+          if (err) {
+            const status = 401;
+            const message = err;
+            res.status(status).json({ status, message });
+            return;
+          }
         }
-      }
-    );
+      );
+    });
   });
 
   // Create token for new user
@@ -88,21 +105,20 @@ server.post("/auth/register", (req, res) => {
 });
 
 // Login to one of the users from ./users.json
-server.post("/auth/login", (req, res) => {
-  console.log("login endpoint called; request body:");
-  console.log(req.body);
+server.post("/auth/login", async (req, res) => {
   const { email, password } = req.body;
-  if (isAuthenticated({ email, password }) === false) {
+
+  if ((await isAuthenticated({ email, password })) === false) {
     const status = 401;
     const message = "Incorrect email or password";
     res.status(status).json({ status, message });
     return;
+  } else {
+    const access_token = createToken({ email, password });
+    res
+      .status(200)
+      .json({ access_token, user: { email, avatar: faker.image.avatar() } });
   }
-  const access_token = createToken({ email, password });
-  console.log("Access Token:" + access_token);
-  res
-    .status(200)
-    .json({ access_token, user: { email, avatar: faker.image.avatar() } });
 });
 
 server.get("/auth/me", (req, res) => {

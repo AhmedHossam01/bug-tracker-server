@@ -1,10 +1,1 @@
-{
-  "users": [
-    {
-      "id": 1,
-      "email": "nilson@email.com",
-      "password": "nilson",
-      "avatar": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/342.jpg"
-    }
-  ]
-}
+{"users":[{"id":1,"email":"nilson@email.com","password":"nilson","avatar":"https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/342.jpg"},{"id":2,"email":"test@gmail.com","password":"$2b$10$FTL6dIizLd6byWgCZRipjuzybowgJ73tjPWytnFPAiX0HU12LIvCK"},{"id":3,"email":"nilson@gmail.com","password":"$2b$10$ZPhXzZL9h1fGrhkJT2w8vukxdg0sfZIqzU6aYGdyVQxYfjrS/xLQ2"},{"id":4,"email":"1318039@gmail.com","password":"$2b$10$CAikWlqppXenDrZWEHhrxu/bEAF9AlKY7nNfwWIBCqrciAhbvJ2Zm"},{"id":5,"email":"ahmed@gmail.com","password":"$2b$10$Ym6gMm4BZKSaYKCPuL2Wzuu6jDOJhN30GhTy0ROwCjiTf4CqIycKO"}]}
